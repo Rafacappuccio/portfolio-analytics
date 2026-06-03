@@ -1,1 +1,123 @@
-<h1>Meu Portfolio de Dados e BI</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Cappuccio | Portfólio de Dados</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0ea5e9;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="main-title">Rafael Cappuccio</h1>
+        <p class="subtitle">Graduando em Ciência de Dados & Analista de BI</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Sobre o Projeto</h2>
+            <p>Este portfólio foi desenvolvido para hospedar minhas análises e automações. O foco principal é a criação de um ecossistema focado em inteligência de negócios para o setor de saúde, monitorando faturamento, reembolsos e SLAs de atendimento.</p>
+        </section>
+
+        <section class="card">
+            <h2>Dashboard Interativo</h2>
+            <p>O painel analítico em Power BI será renderizado dinamicamente logo abaixo.</p>
+            <button class="btn" id="btn-interagir">Testar Interação JS</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 - Desenvolvido por Rafael Cappuccio</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
