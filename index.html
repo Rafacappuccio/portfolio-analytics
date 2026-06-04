@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafael Cappuccio | Portfólio de Dados & BI</title>
     <style>
+        /* Variáveis de cores para o Modo Escuro (Padrão) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #111827;
@@ -13,6 +14,19 @@
             --text-muted: #9ca3af;
             --accent-blue: #38bdf8;
             --accent-green: #10b981;
+            --nav-bg: rgba(17, 24, 39, 0.8);
+        }
+
+        /* Variáveis de cores para o Modo Claro */
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent-blue: #0284c7;
+            --accent-green: #16a34a;
+            --nav-bg: rgba(255, 255, 255, 0.8);
         }
 
         body {
@@ -25,12 +39,90 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            scroll-behavior: smooth;
+            padding-top: 80px; /* Espaço para o menu fixo não cobrir o conteúdo */
         }
 
+        /* BARRA DE NAVEGAÇÃO FIXA (NAVBAR) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-sizing: border-box;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Caixa temporária para simular onde sua logo vai entrar */
+        .logo-box {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-blue), #818cf8);
+            border-radius: 6px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Botão de alternar tema */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-border);
+        }
+
+        /* SEÇÕES E LAYOUT */
         header {
             width: 100%;
             max-width: 900px;
-            padding: 4rem 1.5rem 2rem 1.5rem;
+            padding: 3rem 1.5rem 1rem 1.5rem;
             box-sizing: border-box;
         }
 
@@ -53,33 +145,16 @@
             margin: 0 0 1.5rem 0;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-outline {
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            background: transparent;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .btn-outline:hover {
-            background: var(--card-border);
-            border-color: var(--text-muted);
-        }
-
         main {
             width: 100%;
             max-width: 900px;
             padding: 1.5rem;
             box-sizing: border-box;
+        }
+
+        .section-area {
+            scroll-margin-top: 100px; /* Evita que o menu fixo cubra o título ao rolar */
+            margin-bottom: 1rem;
         }
 
         .section-title {
@@ -111,7 +186,7 @@
             border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
 
@@ -142,12 +217,13 @@
 
         p {
             line-height: 1.7;
-            color: #d1d5db;
+            color: var(--text-main);
+            opacity: 0.9;
             margin: 0 0 1.5rem 0;
         }
 
         .dashboard-placeholder {
-            background: #070a12;
+            background: var(--bg-color);
             border: 2px dashed var(--card-border);
             border-radius: 8px;
             height: 350px;
@@ -158,11 +234,12 @@
             color: var(--text-muted);
             text-align: center;
             padding: 1rem;
+            box-sizing: border-box;
         }
 
         .btn-primary {
             background-color: var(--accent-blue);
-            color: #0b0f19;
+            color: #ffffff;
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 6px;
@@ -171,8 +248,13 @@
             transition: background 0.2s;
         }
 
+        /* Ajuste de cor do texto do botão no tema escuro */
+        [data-theme="dark"] .btn-primary {
+            color: #0b0f19;
+        }
+
         .btn-primary:hover {
-            background-color: #0ea5e9;
+            opacity: 0.9;
         }
 
         footer {
@@ -190,41 +272,79 @@
 </head>
 <body>
 
-    <header>
+    <!-- MENUBAR SUPERIOR COMPLETO -->
+    <nav class="navbar">
+        <div class="logo-placeholder">
+            <div class="logo-box"></div> <!-- Sua futura logo entra aqui -->
+            <span>RC Dados</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#inicio" class="nav-link">Início</a></li>
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#projetos" class="nav-link">Projetos</a></li>
+            <li><a href="#certificados" class="nav-link">Certificados</a></li>
+            <li><a href="#contatos" class="nav-link">Contatos</a></li>
+            <li>
+                <button class="theme-toggle" id="btn-tema">
+                    <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- SEÇÃO: INÍCIO -->
+    <header id="inicio" class="section-area">
         <h1>Olá, me chamo <span class="gradient-text">Rafael Cappuccio</span></h1>
         <p class="subtitle">Cientista de Dados em Formação & Analista de BI</p>
-        <div class="social-links">
-            <!-- COLOQUE SEUS LINKS REAIS AQUI DEPOIS -->
-            <a href="https://www.linkedin.com/in/rafael-cappuccio/" target="_blank" class="btn-outline">LinkedIn</a>
-            <a href="https://github.com/Rafacappuccio" target="_blank" class="btn-outline">GitHub</a>
-        </div>
     </header>
 
     <main>
-        <h2 class="section-title">Tecnologias & Competências</h2>
-        <div class="skills-grid">
-            <div class="skill-badge">Power BI</div>
-            <div class="skill-badge">Microsoft Excel</div>
-            <div class="skill-badge">SQL</div>
-            <div class="skill-badge">Python</div>
-            <div class="skill-badge">JavaScript</div>
-        </div>
+        <!-- SEÇÃO: SOBRE -->
+        <section id="sobre" class="section-area">
+            <h2 class="section-title">Tecnologias & Competências</h2>
+            <div class="skills-grid">
+                <div class="skill-badge">Power BI</div>
+                <div class="skill-badge">Microsoft Excel</div>
+                <div class="skill-badge">SQL</div>
+                <div class="skill-badge">Python</div>
+                <div class="skill-badge">JavaScript</div>
+            </div>
+        </section>
 
-        <h2 class="section-title">Projetos em Destaque</h2>
-        <div class="card">
-            <div class="project-header">
-                <h3 class="project-title">Inteligência de Negócios aplicada à Gestão de Saúde</h3>
-                <span class="status-badge">Em Desenvolvimento</span>
+        <!-- SEÇÃO: PROJETOS -->
+        <section id="projetos" class="section-area">
+            <h2 class="section-title">Projetos em Destaque</h2>
+            <div class="card">
+                <div class="project-header">
+                    <h3 class="project-title">Inteligência de Negócios aplicada à Gestão de Saúde</h3>
+                    <span class="status-badge">Em Desenvolvimento</span>
+                </div>
+                <p>Engenharia de dados e construção de dashboard estratégico focado no setor de saúde. O projeto visa centralizar indicadores de faturamento, monitorar o tempo médio de atendimento (SLAs) e analisar taxas de aprovação de reembolsos operacionais, transformando dados dispersos em insights acionáveis.</p>
+                
+                <div class="dashboard-placeholder" id="painel-bi">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span>O Dashboard Interativo do Power BI será embutido neste espaço.</span>
+                    <button class="btn-primary" id="btn-interagir" style="margin-top: 1rem;">Iniciar Simulação</button>
+                </div>
             </div>
-            <p>Engenharia de dados e construção de dashboard estratégico focado no setor de saúde. O projeto visa centralizar indicadores de faturamento, monitorar o tempo médio de atendimento (SLAs) e analisar taxas de aprovação de reembolsos operacionais, transformando dados dispersos em insights acionáveis.</p>
-            
-            <div class="dashboard-placeholder" id="painel-bi">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                <span>O Dashboard Interativo do Power BI será embutido neste espaço.</span>
-                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #6b7280;">Use o botão abaixo para simular a carga dos componentes analíticos.</p>
-                <button class="btn-primary" id="btn-interagir">Iniciar Simulação</button>
+        </section>
+
+        <!-- SEÇÃO: CERTIFICADOS -->
+        <section id="certificados" class="section-area">
+            <h2 class="section-title">Certificados</h2>
+            <div class="card">
+                <p>Espaço reservado para listar as certificações de Power BI, SQL e Bootcamps concluídos.</p>
             </div>
-        </div>
+        </section>
+
+        <!-- SEÇÃO: CONTATOS -->
+        <section id="contatos" class="section-area">
+            <h2 class="section-title">Contato</h2>
+            <div class="card">
+                <p>Sinta-se à vontade para entrar em contato para oportunidades profissionais ou networking.</p>
+                <p>📧 Email: rafacappuccio2@gmail.com</p>
+            </div>
+        </section>
     </main>
 
     <footer>
