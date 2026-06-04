@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark" data-lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafael Cappuccio | Portfólio de Dados & BI</title>
+    <title>Rafael Cappuccio | Portfolio</title>
+    
+    <!-- Define a sua logo como o ícone da aba do navegador (Favicon) -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <style>
-        /* Variáveis de cores para o Modo Escuro (Padrão) */
+        /* Variáveis de Cores - Estilo Premium e Minimalista */
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --text-main: #f9fafb;
+            --bg-color: #090d16;
+            --card-bg: #111726;
+            --card-border: #1e2638;
+            --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --accent-blue: #38bdf8;
-            --accent-green: #10b981;
-            --nav-bg: rgba(17, 24, 39, 0.8);
+            --accent-gold: #c5a880; /* Tom dourado baseado na sua logo */
+            --nav-bg: rgba(9, 13, 22, 0.85);
+            --shadow-glow: rgba(197, 168, 128, 0.08);
         }
 
-        /* Variáveis de cores para o Modo Claro */
         [data-theme="light"] {
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --card-border: #e2e8f0;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --accent-blue: #0284c7;
-            --accent-green: #16a34a;
-            --nav-bg: rgba(255, 255, 255, 0.8);
+            --accent-gold: #b48956;
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            --shadow-glow: rgba(180, 137, 86, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -39,47 +46,41 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            scroll-behavior: smooth;
-            padding-top: 80px; /* Espaço para o menu fixo não cobrir o conteúdo */
+            overflow-x: hidden;
         }
 
-        /* BARRA DE NAVEGAÇÃO FIXA (NAVBAR) */
+        /* NAVBAR FIXA */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             background-color: var(--nav-bg);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 0.75rem 2rem;
             box-sizing: border-box;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
-        .logo-placeholder {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--accent-blue);
+        .nav-logo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .nav-right {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Caixa temporária para simular onde sua logo vai entrar */
-        .logo-box {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent-blue), #818cf8);
-            border-radius: 6px;
+            gap: 2rem;
         }
 
         .nav-menu {
             display: flex;
-            align-items: center;
             gap: 1.5rem;
             list-style: none;
             margin: 0;
@@ -89,266 +90,362 @@
         .nav-link {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
+            letter-spacing: 0.03em;
             transition: color 0.2s;
         }
 
         .nav-link:hover {
-            color: var(--accent-blue);
+            color: var(--accent-gold);
         }
 
-        /* Botão de alternar tema */
-        .theme-toggle {
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-control {
             background: transparent;
             border: 1px solid var(--card-border);
             color: var(--text-main);
             padding: 0.4rem 0.8rem;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
             transition: all 0.2s;
         }
 
-        .theme-toggle:hover {
+        .btn-control:hover {
+            border-color: var(--accent-gold);
             background-color: var(--card-border);
         }
 
-        /* SEÇÕES E LAYOUT */
-        header {
-            width: 100%;
-            max-width: 900px;
-            padding: 3rem 1.5rem 1rem 1.5rem;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.025em;
-        }
-
-        .gradient-text {
-            background: linear-gradient(to right, var(--accent-blue), #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-            margin: 0 0 1.5rem 0;
-        }
-
+        /* CONTAINER PRINCIPAL */
         main {
             width: 100%;
-            max-width: 900px;
-            padding: 1.5rem;
+            max-width: 950px;
+            padding: 120px 1.5rem 6rem 1.5rem;
             box-sizing: border-box;
         }
 
-        .section-area {
-            scroll-margin-top: 100px; /* Evita que o menu fixo cubra o título ao rolar */
-            margin-bottom: 1rem;
+        /* EFEITO FADE IN AUTO-LOAD */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            visibility: hidden;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 2rem 0 1rem 0;
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        /* SEÇÃO SOBRE MIM (HOME) */
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 1.7;
             color: var(--text-main);
+            margin: 0;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .skill-badge {
+        .profile-frame {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 2px solid var(--card-border);
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 0.75rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            font-size: 0.9rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            transition: border-color 0.3s;
         }
 
-        .card {
+        .profile-frame:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* CARD DE COMPETÊNCIAS COM BRILHO LEVE */
+        .skills-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 5rem;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
-        .project-header {
+        .skills-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            box-shadow: 0 0 25px var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .skills-grid {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 1rem;
         }
 
-        .project-title {
-            font-size: 1.25rem;
+        .skill-item {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* SEÇÃO PROJETOS */
+        .section-title {
+            font-size: 1.6rem;
             font-weight: 700;
-            margin: 0;
-            color: var(--accent-blue);
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
         }
 
-        .status-badge {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 5rem;
         }
 
-        p {
+        .project-desc {
+            color: var(--text-muted);
             line-height: 1.7;
-            color: var(--text-main);
-            opacity: 0.9;
-            margin: 0 0 1.5rem 0;
+            font-size: 1rem;
         }
 
-        .dashboard-placeholder {
-            background: var(--bg-color);
-            border: 2px dashed var(--card-border);
+        .dashboard-area {
+            background: rgba(0,0,0,0.15);
+            border: 1px dashed var(--card-border);
             border-radius: 8px;
-            height: 350px;
+            height: 380px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: var(--text-muted);
-            text-align: center;
-            padding: 1rem;
-            box-sizing: border-box;
+            margin-top: 2rem;
         }
 
-        .btn-primary {
-            background-color: var(--accent-blue);
-            color: #ffffff;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
+        /* SEÇÃO CONTATO */
+        .contact-section {
+            text-align: center;
+            padding: 3rem 0 6rem 0;
+        }
+
+        .btn-contact {
+            background-color: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--text-main);
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
             font-weight: 600;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background 0.2s;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        /* Ajuste de cor do texto do botão no tema escuro */
-        [data-theme="dark"] .btn-primary {
-            color: #0b0f19;
+        .btn-contact:hover {
+            background-color: var(--accent-gold);
+            color: #090d16 !important;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        /* BOTÕES SOCIAIS FLUTUANTES (INFERIOR DIREITO) */
+        .floating-socials {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 999;
         }
 
+        .btn-social {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-social:hover {
+            border-color: var(--accent-gold);
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-social svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-main);
+            transition: fill 0.2s;
+        }
+
+        .btn-social:hover svg {
+            fill: var(--accent-gold);
+        }
+
+        /* FOOTER & VOLTAR AO TOPO */
         footer {
-            margin-top: auto;
-            padding: 3rem 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            text-align: center;
-            border-top: 1px solid var(--card-border);
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
+            padding: 2rem 1.5rem;
             box-sizing: border-box;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .btn-top {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.2s;
+        }
+
+        .btn-top:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 768px) {
+            .about-section { flex-direction: column-reverse; text-align: center; }
+            .nav-menu { display: none; }
+            .skills-grid { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- MENUBAR SUPERIOR COMPLETO -->
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo-placeholder">
-            <div class="logo-box"></div> <!-- Sua futura logo entra aqui -->
-            <span>RC Dados</span>
+        <img src="logo.png" alt="Logo RC" class="nav-logo">
+        <div class="nav-right">
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link" data-i18n="nav-home">Início</a></li>
+                <li><a href="#sobre" class="nav-link" data-i18n="nav-about">Sobre</a></li>
+                <li><a href="#projetos" class="nav-link" data-i18n="nav-projects">Projetos</a></li>
+                <li><a href="#certificados" class="nav-link" data-i18n="nav-certs">Certificados</a></li>
+                <li><a href="#contatos" class="nav-link" data-i18n="nav-contact">Contatos</a></li>
+            </ul>
+            <div class="controls">
+                <button class="btn-control" id="btn-tema">☀️ Claro</button>
+                <button class="btn-control" id="btn-lang">EN</button>
+            </div>
         </div>
-        <ul class="nav-menu">
-            <li><a href="#inicio" class="nav-link">Início</a></li>
-            <li><a href="#sobre" class="nav-link">Sobre</a></li>
-            <li><a href="#projetos" class="nav-link">Projetos</a></li>
-            <li><a href="#certificados" class="nav-link">Certificados</a></li>
-            <li><a href="#contatos" class="nav-link">Contatos</a></li>
-            <li>
-                <button class="theme-toggle" id="btn-tema">
-                    <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
-                </button>
-            </li>
-        </ul>
     </nav>
 
-    <!-- SEÇÃO: INÍCIO -->
-    <header id="inicio" class="section-area">
-        <h1>Olá, me chamo <span class="gradient-text">Rafael Cappuccio</span></h1>
-        <p class="subtitle">Cientista de Dados em Formação & Analista de BI</p>
-    </header>
-
     <main>
-        <!-- SEÇÃO: SOBRE -->
-        <section id="sobre" class="section-area">
-            <h2 class="section-title">Tecnologias & Competências</h2>
+        <!-- SEÇÃO INÍCIO & SOBRE MIM -->
+        <section id="inicio" class="about-section fade-in-section">
+            <div class="about-text">
+                <p data-i18n="about-paragraph">Estudante de Ciência de Dados focado no desenvolvimento de soluções estratégicas e inteligência de negócios. Especializado em transformar dados brutos em relatórios dinâmicos que auxiliam na tomada de decisões corporativas eficientes.</p>
+            </div>
+            <div class="profile-frame">
+                <img src="perfil.jpg" alt="Rafael Cappuccio" class="profile-img">
+            </div>
+        </section>
+
+        <!-- CARD DE COMPETÊNCIAS (GLOW EFFECT) -->
+        <div id="sobre" class="skills-card fade-in-section">
             <div class="skills-grid">
-                <div class="skill-badge">Power BI</div>
-                <div class="skill-badge">Microsoft Excel</div>
-                <div class="skill-badge">SQL</div>
-                <div class="skill-badge">Python</div>
-                <div class="skill-badge">JavaScript</div>
+                <div class="skill-item">POWER BI</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">EXCEL</div>
+                <div class="skill-item">PYTHON</div>
+                <div class="skill-item">JAVASCRIPT</div>
             </div>
-        </section>
+        </div>
 
-        <!-- SEÇÃO: PROJETOS -->
-        <section id="projetos" class="section-area">
-            <h2 class="section-title">Projetos em Destaque</h2>
-            <div class="card">
-                <div class="project-header">
-                    <h3 class="project-title">Inteligência de Negócios aplicada à Gestão de Saúde</h3>
-                    <span class="status-badge">Em Desenvolvimento</span>
+        <!-- SEÇÃO PROJETOS -->
+        <section id="projetos" class="fade-in-section">
+            <h2 class="section-title" data-i18n="title-projects">Projetos em Destaque</h2>
+            <div class="project-card">
+                <div class="project-desc" data-i18n="project-text">
+                    Engenharia de dados e construção de dashboard estratégico focado no setor de saúde. O projeto visa centralizar indicadores de faturamento, monitorar o tempo médio de atendimento (SLAs) e analisar taxas de aprovação de reembolsos operacionais, transformando dados dispersos em insights acionáveis.
                 </div>
-                <p>Engenharia de dados e construção de dashboard estratégico focado no setor de saúde. O projeto visa centralizar indicadores de faturamento, monitorar o tempo médio de atendimento (SLAs) e analisar taxas de aprovação de reembolsos operacionais, transformando dados dispersos em insights acionáveis.</p>
-                
-                <div class="dashboard-placeholder" id="painel-bi">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                    <span>O Dashboard Interativo do Power BI será embutido neste espaço.</span>
-                    <button class="btn-primary" id="btn-interagir" style="margin-top: 1rem;">Iniciar Simulação</button>
+                <div class="dashboard-area">
+                    <span data-i18n="dash-placeholder">O Dashboard Interativo do Power BI será embutido aqui.</span>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO: CERTIFICADOS -->
-        <section id="certificados" class="section-area">
-            <h2 class="section-title">Certificados</h2>
-            <div class="card">
-                <p>Espaço reservado para listar as certificações de Power BI, SQL e Bootcamps concluídos.</p>
+        <!-- SEÇÃO CERTIFICADOS -->
+        <section id="certificados" class="fade-in-section" style="margin-bottom: 5rem;">
+            <h2 class="section-title" data-i18n="nav-certs">Certificados</h2>
+            <div class="project-card" style="padding: 2rem; text-align: center; color: var(--text-muted);" data-i18n="certs-placeholder">
+                Listagem e comprovação de cursos técnicos e bootcamps.
             </div>
         </section>
 
-        <!-- SEÇÃO: CONTATOS -->
-        <section id="contatos" class="section-area">
-            <h2 class="section-title">Contato</h2>
-            <div class="card">
-                <p>Sinta-se à vontade para entrar em contato para oportunidades profissionais ou networking.</p>
-                <p>📧 Email: rafacappuccio2@gmail.com</p>
-            </div>
+        <!-- SEÇÃO CONTATOS -->
+        <section id="contatos" class="contact-section fade-in-section">
+            <a href="mailto:seu-email@provedor.com" class="btn-contact" data-i18n="btn-contact-text">Entrar em Contato</a>
         </section>
     </main>
 
+    <!-- BOTÕES SOCIAIS FIXOS (Canto inferior direito) -->
+    <div class="floating-socials">
+        <a href="https://github.com/Rafacappuccio" target="_blank" class="btn-social" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/rafael-cappuccio/" target="_blank" class="btn-social" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
-        <p>© 2026 - Desenvolvido por Rafael Cappuccio. Tecnologias utilizadas: HTML, CSS, JavaScript, Git e Vercel.</p>
+        <span id="footer-text">© 2026 - Desenvolvido por Rafael Cappuccio.</span>
+        <button class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            ↑ <span data-i18n="back-to-top">Voltar ao topo</span>
+        </button>
     </footer>
 
     <script src="script.js"></script>
