@@ -80,3 +80,23 @@ const secaoObserver = new IntersectionObserver((entries, observer) => {
 secoes.forEach(secao => {
     secaoObserver.observe(secao);
 });
+// Controle do Botão de Contato Rápido
+const btnAbrirContato = document.getElementById('btn-abrir-contato');
+const modalContato = document.getElementById('modal-contato');
+
+btnAbrirContato.addEventListener('click', () => {
+    if (modalContato.style.display === 'none' || modalContato.style.display === '') {
+        modalContato.style.display = 'flex';
+        // Pequeno atraso para o efeito de transição de opacidade funcionar
+        setTimeout(() => {
+            modalContato.style.opacity = '1';
+        }, 10);
+        btnAbrirContato.style.opacity = '0.6'; // Dá um feedback visual no botão principal
+    } else {
+        modalContato.style.opacity = '0';
+        setTimeout(() => {
+            modalContato.style.display = 'none';
+        }, 300);
+        btnAbrirContato.style.opacity = '1';
+    }
+});

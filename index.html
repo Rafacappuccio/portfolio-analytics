@@ -424,12 +424,24 @@
             </div>
         </section>
 
-        <!-- SEÇÃO CONTATOS -->
+        <!-- SEÇÃO CONTATOS ATUALIZADA -->
         <section id="contatos" class="contact-section fade-in-section">
-            <a href="mailto:seu-email@provedor.com" class="btn-contact" data-i18n="btn-contact-text">Entrar em Contato</a>
+            <!-- Botão Principal que abre as opções -->
+            <button class="btn-contact" id="btn-abrir-contato" data-i18n="btn-contact-text">Entrar em Contato</button>
+            
+            <!-- Janela de Opções Flutuante (Escondida por padrão) -->
+            <div id="modal-contato" style="display: none; margin-top: 1.5rem; justify-content: center; gap: 1rem; opacity: 0; transition: opacity 0.3s ease;">
+                <!-- Link do E-mail -->
+                <a href="mailto:rafacappuccio2@gmail.com?subject=Contato%20Portf%C3%B3lio&body=Ol%C3%A1%20Rafael%2C%20vi%20seu%20portf%C3%B3lio%20e..." class="btn-outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem;">
+                    📧 Email
+                </a>
+                <!-- Link do WhatsApp -->
+                <a href="https://wa.me/5511930179155?text=Ol%C3%A1%20Rafael%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20oportunidades." target="_blank" class="btn-outline" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-color: var(--accent-green); color: var(--accent-green);">
+                    💬 WhatsApp
+                </a>
+            </div>
         </section>
-    </main>
-
+        
     <!-- BOTÕES SOCIAIS FIXOS (Canto inferior direito) -->
     <div class="floating-socials">
         <a href="https://github.com/Rafacappuccio" target="_blank" class="btn-social" title="GitHub">
