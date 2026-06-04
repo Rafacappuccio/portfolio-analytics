@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafael Cappuccio | Portfólio de Dados</title>
+    <title>Rafael Cappuccio | Portfólio de Dados & BI</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #38bdf8;
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
             display: flex;
@@ -27,95 +29,206 @@
 
         header {
             width: 100%;
-            max-width: 800px;
-            padding: 2rem 1rem;
-            text-align: center;
+            max-width: 900px;
+            padding: 4rem 1.5rem 2rem 1.5rem;
+            box-sizing: border-box;
         }
 
         h1 {
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.025em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--accent-blue), #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.2rem;
-            margin-top: 0;
+            font-size: 1.25rem;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            background: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--card-border);
+            border-color: var(--text-muted);
         }
 
         main {
             width: 100%;
-            max-width: 800px;
-            padding: 1rem;
+            max-width: 900px;
+            padding: 1.5rem;
             box-sizing: border-box;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-main);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-badge {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .card {
             background-color: var(--card-bg);
-            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
-            border: 1px solid #334155;
         }
 
-        h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 0.5rem;
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--accent-blue);
+        }
+
+        .status-badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         p {
-            line-height: 1.6;
-            color: #cbd5e1;
+            line-height: 1.7;
+            color: #d1d5db;
+            margin: 0 0 1.5rem 0;
         }
 
-        .btn {
-            background-color: var(--accent-color);
-            color: #0f172a;
+        .dashboard-placeholder {
+            background: #070a12;
+            border: 2px dashed var(--card-border);
+            border-radius: 8px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #0b0f19;
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 4px;
-            font-weight: bold;
+            border-radius: 6px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             background-color: #0ea5e9;
         }
 
         footer {
             margin-top: auto;
-            padding: 2rem;
+            padding: 3rem 1.5rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            width: 100%;
+            max-width: 900px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 id="main-title">Rafael Cappuccio</h1>
-        <p class="subtitle">Graduando em Ciência de Dados & Analista de BI</p>
+        <h1>Olá, me chamo <span class="gradient-text">Rafael Cappuccio</span></h1>
+        <p class="subtitle">Cientista de Dados em Formação & Analista de BI</p>
+        <div class="social-links">
+            <!-- COLOQUE SEUS LINKS REAIS AQUI DEPOIS -->
+            <a href="https://www.linkedin.com/in/rafael-cappuccio/" target="_blank" class="btn-outline">LinkedIn</a>
+            <a href="https://github.com/Rafacappuccio" target="_blank" class="btn-outline">GitHub</a>
+        </div>
     </header>
 
     <main>
-        <section class="card">
-            <h2>Sobre o Projeto</h2>
-            <p>Este portfólio foi desenvolvido para hospedar minhas análises e automações. O foco principal é a criação de um ecossistema focado em inteligência de negócios para o setor de saúde, monitorando faturamento, reembolsos e SLAs de atendimento.</p>
-        </section>
+        <h2 class="section-title">Tecnologias & Competências</h2>
+        <div class="skills-grid">
+            <div class="skill-badge">Power BI</div>
+            <div class="skill-badge">Microsoft Excel</div>
+            <div class="skill-badge">SQL</div>
+            <div class="skill-badge">Python</div>
+            <div class="skill-badge">JavaScript</div>
+        </div>
 
-        <section class="card">
-            <h2>Dashboard Interativo</h2>
-            <p>O painel analítico em Power BI será renderizado dinamicamente logo abaixo.</p>
-            <button class="btn" id="btn-interagir">Testar Interação JS</button>
-        </section>
+        <h2 class="section-title">Projetos em Destaque</h2>
+        <div class="card">
+            <div class="project-header">
+                <h3 class="project-title">Inteligência de Negócios aplicada à Gestão de Saúde</h3>
+                <span class="status-badge">Em Desenvolvimento</span>
+            </div>
+            <p>Engenharia de dados e construção de dashboard estratégico focado no setor de saúde. O projeto visa centralizar indicadores de faturamento, monitorar o tempo médio de atendimento (SLAs) e analisar taxas de aprovação de reembolsos operacionais, transformando dados dispersos em insights acionáveis.</p>
+            
+            <div class="dashboard-placeholder" id="painel-bi">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <span>O Dashboard Interativo do Power BI será embutido neste espaço.</span>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #6b7280;">Use o botão abaixo para simular a carga dos componentes analíticos.</p>
+                <button class="btn-primary" id="btn-interagir">Iniciar Simulação</button>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>© 2026 - Desenvolvido por Rafael Cappuccio</p>
+        <p>© 2026 - Desenvolvido por Rafael Cappuccio. Tecnologias utilizadas: HTML, CSS, JavaScript, Git e Vercel.</p>
     </footer>
 
     <script src="script.js"></script>
